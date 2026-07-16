@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.2.0",
+    "@studio-freight/lenis": "^1.0.42",
+    "aos": "^2.3.4",
+    "countup.js": "^2.10.0",
+    "swiper": "^12.2.0",
+    "vanilla-tilt": "^1.8.1"
+  }
+}

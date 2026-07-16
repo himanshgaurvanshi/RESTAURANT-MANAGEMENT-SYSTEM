@@ -1,0 +1,2143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zaikahub | Fine Dining & Luxury Culinary Experience</title>
+
+  <!-- Google Fonts for Ultra-Premium Michelin Aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #090909;
+      --bg-card: #11110F;
+      --accent-gold: #C5A880;
+      --accent-gold-hover: #E5C9A3;
+      --text-light: #FBFBFA;
+      --text-muted: #9E9E98;
+      --border-color: rgba(197, 168, 128, 0.15);
+      --transition-gold: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-gold);
+      border-radius: 3px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 8%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(9, 9, 9, 0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition-gold);
+    }
+
+    .navbar.scrolled {
+      padding: 16px 8%;
+      background: rgba(9, 9, 9, 0.98);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      color: var(--accent-gold);
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: 2px;
+    }
+
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      color: var(--text-light);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: var(--transition-gold);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--accent-gold);
+      transition: var(--transition-gold);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-gold);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Interactive Menu Drawer */
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 11px;
+      padding: 15px 32px;
+      border-radius: 0px; 
+      cursor: pointer;
+      transition: var(--transition-gold);
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-gold {
+      background: var(--accent-gold);
+      color: #000;
+    }
+
+    .btn-gold:hover {
+      background: var(--accent-gold-hover);
+      box-shadow: 0 10px 30px rgba(197, 168, 128, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-gold);
+      color: #000;
+      box-shadow: 0 10px 25px rgba(197, 168, 128, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Ambient Gold Light Overlay effect */
+    .ambient-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(197, 168, 128, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 60px;
+      padding: 60px 8% 100px 8%;
+      min-height: 92vh;
+      position: relative;
+    }
+
+    .hero-text {
+      padding-right: 50px;
+      z-index: 2;
+    }
+
+    .hero-sub {
+      color: var(--accent-gold);
+      font-size: 13px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-weight: 600;
+    }
+
+    .hero-sub::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--accent-gold);
+    }
+
+    .hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 6vw, 85px);
+      line-height: 1.1;
+      font-weight: 300;
+      margin-bottom: 30px;
+      color: var(--text-light);
+    }
+
+    .hero-text h1 span {
+      font-style: italic;
+      color: var(--accent-gold);
+      font-weight: 400;
+    }
+
+    .hero-text p {
+      max-width: 580px;
+      font-size: 16.5px;
+      line-height: 1.8;
+      margin-bottom: 45px;
+      color: var(--text-muted);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    /* Upgraded Ken Burns Slow-Motion Frame */
+    .hero-image-frame {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      height: 560px;
+      max-width: 440px;
+      background-color: #0d0d0c;
+    }
+
+    .hero-image-frame::before {
+      content: '';
+      position: absolute;
+      inset: 15px;
+      border: 1px solid rgba(197, 168, 128, 0.3);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 12s ease;
+      filter: brightness(85%) contrast(1.1);
+      animation: kenburns-effect 20s infinite alternate;
+    }
+
+    @keyframes kenburns-effect {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+
+    .accolades-section {
+      background: #0d0d0c;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 40px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .accolade-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .accolade-star {
+      color: var(--accent-gold);
+      font-size: 20px;
+      letter-spacing: 3px;
+    }
+
+    .accolade-text h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: var(--text-light);
+    }
+
+    .accolade-text p {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Global Section headers styling */
+    .section {
+      padding: 120px 8%;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-subtitle {
+      color: var(--accent-gold);
+      font-size: 12px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4.5vw, 55px);
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: var(--text-light);
+    }
+
+    .section-title span {
+      font-style: italic;
+      color: var(--accent-gold);
+    }
+
+  .menu-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 40px auto;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: transparent;
+    color: #d4af7f;
+    border: 1px solid #d4af7f;
+    padding: 14px 32px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-transform: uppercase;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #d4af7f;
+    color: #111;
+}
+
+.filter-btn.active {
+    background: #c8a96a;
+    color: #000;
+}
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 40px;
+    }
+
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      transition: var(--transition-gold);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(197, 168, 128, 0.4);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+
+    .menu-img-container {
+      position: relative;
+      overflow: hidden;
+      height: 260px;
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1s ease;
+    }
+
+    .menu-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .menu-card-body {
+      padding: 28px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .menu-card-head h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+
+    .price {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 22px;
+      color: var(--accent-gold);
+    }
+
+    .menu-card-body p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    /* Elegant Wine Pairing Trigger UI */
+    .wine-pairing-panel {
+      border-top: 1px dashed var(--border-color);
+      padding-top: 15px;
+      margin-top: 15px;
+    }
+
+    .wine-trigger {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-gold);
+    }
+
+    .wine-trigger:hover {
+      color: var(--text-light);
+    }
+
+    .wine-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+      font-size: 13px;
+      color: #90A090; /* Soft botanical shade for wine text */
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    .wine-details.expanded {
+      max-height: 80px;
+    }
+
+    .tag {
+      align-self: flex-start;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--border-color);
+      color: var(--accent-gold);
+      background: rgba(197, 168, 128, 0.05);
+      margin-bottom: 15px;
+    }
+
+    .reservation-container {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 60px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 60px;
+      position: relative;
+    }
+
+    .reservation-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      margin-bottom: 25px;
+      font-weight: 300;
+    }
+
+    .reservation-info p {
+      color: var(--text-muted);
+      font-size: 15.5px;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    .info-list {
+      list-style: none;
+      display: grid;
+      gap: 25px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 15px;
+    }
+
+    .info-icon {
+      color: var(--accent-gold);
+      font-size: 20px;
+    }
+
+    /* Virtual Seating Interactive Floor Map */
+    .floor-map-title {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .floor-map-layout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+      background: #080807;
+      padding: 20px;
+      border: 1px solid rgba(197, 168, 128, 0.1);
+    }
+
+    .floor-table {
+      border: 1px solid rgba(197, 168, 128, 0.3);
+      padding: 15px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition-gold);
+    }
+
+    .floor-table h5 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: var(--text-light);
+    }
+
+    .floor-table span {
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .floor-table:hover, .floor-table.active {
+      background: var(--accent-gold);
+      border-color: var(--accent-gold);
+    }
+
+    .floor-table:hover h5, .floor-table.active h5,
+    .floor-table:hover span, .floor-table.active span {
+      color: #000 !important;
+    }
+
+    .reservation-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group-full {
+      grid-column: span 2;
+    }
+
+    .reservation-form label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    .reservation-form input,
+    .reservation-form select,
+    .reservation-form textarea {
+      width: 100%;
+      padding: 16px 18px;
+      border: 1px solid var(--border-color);
+      border-radius: 0;
+      font-size: 14px;
+      background: rgba(255,255,255,0.01);
+      color: var(--text-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: var(--transition-gold);
+    }
+
+    .reservation-form input:focus,
+    .reservation-form select:focus,
+    .reservation-form textarea:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 0 15px rgba(197, 168, 128, 0.1);
+    }
+
+    .reservation-form select option {
+      background-color: var(--bg-card);
+      color: var(--text-light);
+    }
+
+    .luxury-ticket-wrapper {
+      grid-column: span 2;
+      background: radial-gradient(circle at top right, #1a1a17, #0d0d0c);
+      border: 1px solid var(--accent-gold);
+      padding: 50px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(197, 168, 128, 0.05);
+      animation: ticket-slide-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    @keyframes ticket-slide-in {
+      0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Ticket notch details */
+    .luxury-ticket-wrapper::before, .luxury-ticket-wrapper::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: var(--bg-card);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .luxury-ticket-wrapper::before { left: -20px; border-right: 1px solid var(--accent-gold); }
+    .luxury-ticket-wrapper::after { right: -20px; border-left: 1px solid var(--accent-gold); }
+
+    .ticket-header {
+      border-bottom: 1px dashed rgba(197, 168, 128, 0.3);
+      width: 100%;
+      padding-bottom: 25px;
+      margin-bottom: 30px;
+    }
+
+    .ticket-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--accent-gold);
+      font-size: 32px;
+      letter-spacing: 6px;
+    }
+
+    .ticket-body {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      width: 100%;
+      margin-bottom: 35px;
+      text-align: left;
+    }
+
+    .ticket-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .ticket-field span:first-child {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      opacity: 0.8;
+    }
+
+    .ticket-field span:last-child {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+
+    .ticket-footer {
+      border-top: 1px solid rgba(197, 168, 128, 0.15);
+      padding-top: 30px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .ticket-pass-id {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: var(--accent-gold);
+      letter-spacing: 4px;
+    }
+
+    .chefs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 60px;
+    }
+
+    .chef-profile-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 50px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 30px;
+      transition: var(--transition-gold);
+    }
+
+    .chef-profile-card:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-5px);
+    }
+
+    .chef-profile-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chef-profile-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--text-light);
+      margin-bottom: 5px;
+    }
+
+    .chef-role-sub {
+      color: var(--accent-gold);
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    .chef-bio {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+
+    /* Organic Unique layouts for Master Chefs */
+    .chef-image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      height: 300px;
+    }
+
+    .chef-image-container .chef-blob {
+      position: absolute;
+      inset: -15px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(197,168,128,0.1) 0%, rgba(197,168,128,0.02) 50%, transparent 75%);
+      filter: blur(15px);
+      z-index: 0;
+    }
+
+    /* Chef 1 Style */
+    .chef-img-sterling {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 32% 68% 58% 42% / 38% 35% 65% 62%;
+      position: relative;
+      z-index: 1;
+      border: 2px solid var(--accent-gold);
+      filter: grayscale(15%) brightness(90%);
+      transition: var(--transition-gold);
+    }
+
+    /* Chef 2 Style */
+    .chef-img-rostova {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 58% 42% 38% 62% / 45% 65% 35% 55%;
+      position: relative;
+      z-index: 1;
+      border: 2px solid var(--accent-gold);
+      filter: grayscale(15%) brightness(90%);
+      transition: var(--transition-gold);
+    }
+
+    .chef-profile-card:hover img {
+      filter: grayscale(0%) brightness(100%);
+      transform: scale(1.02);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 45px;
+      text-align: center;
+      transition: var(--transition-gold);
+    }
+
+    .contact-card:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-5px);
+    }
+
+    .contact-card svg {
+      color: var(--accent-gold);
+      margin-bottom: 25px;
+    }
+
+    .contact-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 15px;
+      color: var(--text-light);
+    }
+
+    .contact-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .footer {
+      padding: 80px 8% 40px 8%;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      background: #060605;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: 6px;
+      color: var(--text-light);
+      margin-bottom: 30px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 35px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: var(--transition-gold);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-gold);
+    }
+
+    .copyright {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* Mobile Responsive Panel Overlay */
+    .nav-mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(10px);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition-gold);
+    }
+
+    .nav-mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      right: -340px;
+      width: 340px;
+      height: 100vh;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border-color);
+      z-index: 999;
+      padding: 100px 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      transition: var(--transition-gold);
+    }
+
+    .nav-drawer.active {
+      right: 0;
+    }
+
+    .nav-drawer a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 20px;
+      font-family: 'Cormorant Garamond', serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: var(--transition-gold);
+    }
+
+    .nav-drawer a:hover {
+      color: var(--accent-gold);
+      padding-left: 10px;
+    }
+
+    @media (max-width: 1200px) {
+      .navbar { padding: 20px 5%; }
+      .hero { grid-template-columns: 1fr; gap: 50px; padding: 40px 5% 80px 5%; }
+      .hero-text { padding-right: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
+      .hero-image-frame { order: -1; margin: 0 auto; width: 100%; max-width: 440px; }
+      .reservation-container { grid-template-columns: 1fr; padding: 40px; }
+      .chefs-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .chef-profile-card { grid-template-columns: 1fr; text-align: center; padding: 30px; }
+      .chef-image-container { order: -1; }
+      .accolades-section { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Ambient Glow Ring -->
+  <div class="ambient-glow" style="top: -200px; left: -100px;"></div>
+
+  <header class="navbar" id="top-navbar">
+    <a href="#home" class="logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">zaikahub</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#about">Our Story</a>
+      <a href="#reservation">Reservations</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    <button class="btn btn-outline" style="margin-left: 20px;" onclick="scrollToSection('reservation')">Book Table</button>
+  </header>
+
+  <!-- Mobile Overlay Panel -->
+  <div class="nav-mobile-overlay" id="mobile-overlay" onclick="toggleMobileMenu()"></div>
+  <div class="nav-drawer" id="mobile-drawer">
+    <a href="#home" onclick="toggleMobileMenu()">Home</a>
+    <a href="#menu" onclick="toggleMobileMenu()">Menu</a>
+    <a href="#about" onclick="toggleMobileMenu()">Our Story</a>
+    <a href="#reservation" onclick="toggleMobileMenu()">Reservations</a>
+    <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+  </div>
+
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <span class="hero-sub">EST. 2026 • Michelin Dining</span>
+      <h1>Gastronomy that <span>touches the soul</span></h1>
+      <p>
+        Step into an atmosphere of sensory indulgence. At zaikahub, every plate is a meticulously curated piece of art, blending age-old tradition with contemporary culinary design.
+      </p>
+      <div class="hero-cta">
+        <button class="btn btn-gold" onclick="scrollToSection('reservation')">Book A Table</button>
+        <button class="btn btn-outline" onclick="scrollToSection('menu')">Explore Menu</button>
+      </div>
+    </div>
+
+    <div class="hero-image-frame">
+      <!-- Standard Django static file lookup fallback to high-end Unsplash imagery -->
+      <img src="{% static 'dishes/salmon.jpg' %}" 
+           onerror="this.src='https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80'" 
+           alt="zaikahub Signature Salmon Culinary Art">
+    </div>
+  </section>
+
+  <div class="accolades-section">
+    <div class="accolade-item">
+      <div class="accolade-star">★★★</div>
+      <div class="accolade-text">
+        <h4>Michelin Guide</h4>
+        <p>Three Star Distinction</p>
+      </div>
+    </div>
+    <div class="accolade-item">
+      <div class="accolade-star">🍷</div>
+      <div class="accolade-text">
+        <h4>Wine Spectator</h4>
+        <p>Grand Award Selection</p>
+      </div>
+    </div>
+    <div class="accolade-item">
+      <div class="accolade-star">✦</div>
+      <div class="accolade-text">
+        <h4>La Liste</h4>
+        <p>Top 10 Global Dining</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" id="menu">
+    <div class="section-header">
+      <span class="section-subtitle">Exquisite Curations</span>
+      <h2 class="section-title">The Signature <span>Menu</span></h2>
+    </div>
+
+      <!-- Live Category Selectors -->
+<div class="filter-buttons" style="text-align: center;">
+  <button class="filter-btn active" onclick="filterMenu('all')">All Creations</button>
+  <button class="filter-btn" onclick="filterMenu('mains')">Mains</button>
+  <button class="filter-btn" onclick="filterMenu('desserts')">Desserts</button>
+  <button class="filter-btn" onclick="filterMenu('sides')">Sides</button>
+  <button class="filter-btn" onclick="filterMenu('beverages')">Drinks</button>
+</div>
+</br>
+    <div class="menu-grid" id="menu-grid">
+      <!-- Item 1 (Mains) -->
+      <!-- Item 1 -->
+<div class="menu-card" data-category="mains">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/pasta.jpg' %}" alt="Truffle Tagliolini">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Truffle Tagliolini</h3>
+            <span class="price">₹300</span>
+        </div>
+
+        <p>
+            Handcrafted tagliolini with rich white truffle cream,
+            topped with aged Pecorino Romano cheese.
+        </p>
+
+        <span class="tag">Chef Special</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Wine Pairing
+            </button>
+
+            <div class="wine-details">
+                Sommelier Recommends: 2018 Barolo Cerretta DOCG.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item 2 -->
+<div class="menu-card" data-category="mains">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/steak.jpg' %}" alt="Dry Aged Sirloin">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Dry Aged Sirloin</h3>
+            <span class="price">₹200</span>
+        </div>
+
+        <p>
+            45-day dry-aged sirloin served with rosemary bone marrow jus
+            and smoked sea salt.
+        </p>
+
+        <span class="tag">Mains</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Wine Pairing
+            </button>
+
+            <div class="wine-details">
+                Sommelier Recommends: Chateau Margaux Grand Cru.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item 3 -->
+<div class="menu-card" data-category="desserts">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/donut.jpg' %}" alt="Golden Beignet">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Golden Beignet</h3>
+            <span class="price">₹70</span>
+        </div>
+
+        <p>
+            Light artisan pastry infused with Madagascan vanilla,
+            served with warm saffron chocolate.
+        </p>
+
+        <span class="tag">Dessert</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Wine Pairing
+            </button>
+
+            <div class="wine-details">
+                Sommelier Recommends: Chateau d'Yquem Sauternes.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item 4 -->
+<div class="menu-card" data-category="mains">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/burger.jpg' %}" alt="zaikahub Burger">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>zaikahub Reserve Burger</h3>
+            <span class="price">₹170</span>
+        </div>
+
+        <p>
+            Angus beef burger with caramelized onion,
+            truffle brie cheese and brioche bun.
+        </p>
+
+        <span class="tag">Chef Choice</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Wine Pairing
+            </button>
+
+            <div class="wine-details">
+                Napa Valley Cabernet Sauvignon.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item 5 -->
+<div class="menu-card" data-category="sides">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/fries.jpg' %}" alt="Herb Fries">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Herb Dust Fries</h3>
+            <span class="price">₹70</span>
+        </div>
+
+        <p>
+            Crispy fries tossed with smoked paprika,
+            herbs and garlic aioli dip.
+        </p>
+
+        <span class="tag">Sides</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Wine Pairing
+            </button>
+
+            <div class="wine-details">
+                Brut Imperial Champagne.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item 6 -->
+<div class="menu-card" data-category="mains">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/pizza.jpg' %}" alt="Flatbread Pizza">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Prosciutto Flatbread</h3>
+            <span class="price">₹250</span>
+        </div>
+
+        <p>
+            Wood-fired flatbread topped with figs,
+            gorgonzola cheese and wild rocket.
+        </p>
+
+        <span class="tag">Premium</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Wine Pairing
+            </button>
+
+            <div class="wine-details">
+                Chianti Classico Riserva.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item 7 -->
+<div class="menu-card" data-category="mains">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/salmon.jpg' %}" alt="Grilled Salmon">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Grilled Atlantic Salmon</h3>
+            <span class="price">₹450</span>
+        </div>
+
+        <p>
+            Fresh grilled salmon served with butter sauce,
+            seasonal vegetables and lemon herbs.
+        </p>
+
+        <span class="tag">Signature</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Wine Pairing
+            </button>
+
+            <div class="wine-details">
+                Sauvignon Blanc Reserve.
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Item 8 -->
+<div class="menu-card" data-category="mains">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/shahipaneer.jpg' %}" alt="Shahi Paneer">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Shahi Paneer</h3>
+            <span class="price">₹399</span>
+        </div>
+
+        <p>
+            Soft paneer cubes cooked in rich cashew gravy,
+            fresh cream and aromatic Indian spices.
+        </p>
+
+        <span class="tag">Chef Special</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Beverage Pairing   
+            </button>
+
+            <div class="wine-details">
+                Best Served With: Sweet Lassi.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item 9 -->
+<div class="menu-card" data-category="mains">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/malayipaneer.jpg' %}" alt="Malai Paneer">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Malai Paneer</h3>
+            <span class="price">₹379</span>
+        </div>
+
+        <p>
+            Creamy paneer prepared with fresh cream,
+            butter and mild aromatic spices.
+        </p>
+
+        <span class="tag">Popular</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Beverage Pairing
+            </button>
+
+            <div class="wine-details">
+                Best Served With: Fresh Lime Soda.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item 10 -->
+<div class="menu-card" data-category="mains">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/mattarpaneer.jpg' %}" alt="Matar Paneer">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Matar Paneer</h3>
+            <span class="price">₹329</span>
+        </div>
+
+        <p>
+            Fresh green peas and soft paneer
+            simmered in traditional Indian tomato gravy.
+        </p>
+
+        <span class="tag">Veg Special</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Beverage Pairing
+            </button>
+
+            <div class="wine-details">
+                Best Served With: Masala Chaas.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item 11 -->
+<div class="menu-card" data-category="mains">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/paneertandoor.jpg' %}" alt="Paneer Tandoor">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Paneer Tandoor</h3>
+            <span class="price">₹349</span>
+        </div>
+
+        <p>
+            Fresh paneer marinated with yogurt and spices,
+            roasted inside a traditional tandoor.
+        </p>
+
+        <span class="tag">Grilled</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Beverage Pairing
+            </button>
+
+            <div class="wine-details">
+                Best Served With: Mint Mojito.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item 12 -->
+<div class="menu-card" data-category="mains">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/paneerlababdaar.jpg' %}" alt="Paneer Lababdar">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Paneer Lababdar</h3>
+            <span class="price">₹389</span>
+        </div>
+
+        <p>
+            Rich butter tomato gravy loaded with
+            soft paneer cubes and fresh cream.
+        </p>
+
+        <span class="tag">Premium</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Beverage Pairing
+            </button>
+
+            <div class="wine-details">
+                Best Served With: Mango Lassi.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item 13 -->
+<div class="menu-card" data-category="mains">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/rajma.jpg' %}" alt="Rajma Masala">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Rajma Masala</h3>
+            <span class="price">₹249</span>
+        </div>
+
+        <p>
+            Slow-cooked kidney beans in authentic Punjabi gravy,
+            served with steamed basmati rice.
+        </p>
+
+        <span class="tag">Healthy</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Beverage Pairing
+            </button>
+
+            <div class="wine-details">
+                Best Served With: Salted Lassi.
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===================== ITEM 14 ===================== -->
+<div class="menu-card" data-category="snacks">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/pavbhaji.jpg' %}" alt="Pav Bhaji">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Pav Bhaji</h3>
+            <span class="price">₹199</span>
+        </div>
+
+        <p>Spicy mashed vegetables served with buttery toasted pav.</p>
+
+        <span class="tag">Street Food</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Beverage
+            </button>
+
+            <div class="wine-details">
+                Best Served With: Masala Chaas.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== ITEM 15 ===================== -->
+<div class="menu-card" data-category="snacks">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/momos.jpg' %}" alt="Veg Momos">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Veg Momos</h3>
+            <span class="price">₹199</span>
+        </div>
+
+        <p>Steamed vegetable momos served with spicy Schezwan chutney.</p>
+
+        <span class="tag">Snacks</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Beverage
+            </button>
+
+            <div class="wine-details">
+                Best Served With: Lemon Ice Tea.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== ITEM 16 ===================== -->
+<div class="menu-card" data-category="snacks">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/samosa.jpg' %}" alt="Samosa">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Crispy Samosa</h3>
+            <span class="price">₹79</span>
+        </div>
+
+        <p>Golden fried samosas stuffed with spicy potato filling.</p>
+
+        <span class="tag">Popular</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ Show Beverage
+            </button>
+
+            <div class="wine-details">
+                Best Served With: Hot Masala Tea.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== ITEM 17 ===================== -->
+<div class="menu-card" data-category="beverages">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/lassi.jpg' %}" alt="Sweet Lassi">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Sweet Lassi</h3>
+            <span class="price">₹99</span>
+        </div>
+
+        <p>Refreshing yogurt drink topped with dry fruits.</p>
+
+        <span class="tag">Beverage</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ View Details
+            </button>
+
+            <div class="wine-details">
+                Freshly prepared with thick curd and cardamom.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== ITEM 18 ===================== -->
+<div class="menu-card" data-category="desserts">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/rasgulla.jpg' %}" alt="Rasgulla">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Rasgulla</h3>
+            <span class="price">₹129</span>
+        </div>
+
+        <p>Soft Bengali cottage cheese balls soaked in sugar syrup.</p>
+
+        <span class="tag">Dessert</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ View Details
+            </button>
+
+            <div class="wine-details">
+                Traditional Bengali sweet made fresh every day.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== ITEM 19 ===================== -->
+<div class="menu-card" data-category="desserts">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/rasmalay.jpg' %}" alt="Rasmalai">
+    </div>
+
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Rasmalai</h3>
+            <span class="price">₹149</span>
+        </div>
+
+        <p>Soft cottage cheese dumplings served in saffron flavored milk.</p>
+
+        <span class="tag">Dessert</span>
+
+        <div class="wine-pairing-panel">
+            <button class="wine-trigger" onclick="toggleWinePairing(this)">
+                ✦ View Details
+            </button>
+
+            <div class="wine-details">
+                Garnished with pistachios, almonds and saffron.
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- ===================== Banana Shake ===================== -->
+<div class="menu-card" data-category="beverages">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/bananashake.jpg' %}" alt="Banana Shake">
+    </div>
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Banana Shake</h3>
+            <span class="price">₹149</span>
+        </div>
+        <p>Fresh bananas blended with chilled milk and vanilla ice cream.</p>
+        <span class="tag">Shake</span>
+    </div>
+</div>
+
+<!-- ===================== Brownie Ice Cream ===================== -->
+<div class="menu-card" data-category="beverages">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/browniicecream.jpg' %}" alt="Brownie Ice Cream">
+    </div>
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Brownie Ice Cream</h3>
+            <span class="price">₹229</span>
+        </div>
+        <p>Warm chocolate brownie served with creamy vanilla ice cream.</p>
+        <span class="tag">Dessert</span>
+    </div>
+</div>
+
+<!-- ===================== Cherry Cup ===================== -->
+<div class="menu-card" data-category="beverages">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/cherrycup.jpg' %}" alt="Cherry Cup">
+    </div>
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Cherry Cup</h3>
+            <span class="price">₹169</span>
+        </div>
+        <p>Sweet cherry delight topped with whipped cream.</p>
+        <span class="tag">Special</span>
+    </div>
+</div>
+
+<!-- ===================== Cherry Ice Cream Cup ===================== -->
+<div class="menu-card" data-category="beverages">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/cherryicecreamcup.jpg' %}" alt="Cherry Ice Cream Cup">
+    </div>
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Cherry Ice Cream Cup</h3>
+            <span class="price">₹199</span>
+        </div>
+        <p>Premium cherry ice cream served with chocolate syrup.</p>
+        <span class="tag">Ice Cream</span>
+    </div>
+</div>
+
+<!-- ===================== Chocolate Lava Cup ===================== -->
+<div class="menu-card" data-category="beverages">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/chocolavacup.jpg' %}" alt="Chocolate Lava Cup">
+    </div>
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Chocolate Lava Cup</h3>
+            <span class="price">₹249</span>
+        </div>
+        <p>Rich molten chocolate lava topped with fresh cream.</p>
+        <span class="tag">Hot Favorite</span>
+    </div>
+</div>
+
+<!-- ===================== Lemon Juice ===================== -->
+<div class="menu-card" data-category="beverages">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/lemonjuice.jpg' %}" alt="Lemon Juice">
+    </div>
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Lemon Juice</h3>
+            <span class="price">₹99</span>
+        </div>
+        <p>Fresh lemon juice served chilled with mint leaves.</p>
+        <span class="tag">Fresh Juice</span>
+    </div>
+</div>
+
+<!-- ===================== Shahi Mango Shake ===================== -->
+<div class="menu-card" data-category="beverages">
+    <div class="menu-img-container">
+        <img src="{% static 'dishes/shahimango.jpg' %}" alt="Shahi Mango Shake">
+    </div>
+    <div class="menu-card-body">
+        <div class="menu-card-head">
+            <h3>Shahi Mango Shake</h3>
+            <span class="price">₹189</span>
+        </div>
+        <p>Premium Alphonso mango shake topped with dry fruits.</p>
+        <span class="tag">Premium</span>
+    </div>
+</div>
+</div>
+</div>
+    </div>
+  </section>
+
+  <section class="section" id="reservation">
+    <div class="section-header">
+      <span class="section-subtitle">Secure Seating</span>
+      <h2 class="section-title">The Grand <span>Salon Seating</span></h2>
+    </div>
+
+    <div class="reservation-container" id="reservation-holder">
+      <div class="reservation-info">
+        <h3>Join Us For An Unforgettable Evening</h3>
+        <p>Whether it is an intimate celebratory anniversary dinner or a business rendezvous, zaikahub offers the perfect space tailored to your desires.</p>
+        
+        <!-- Interactive floor plan map -->
+        <h4 class="floor-map-title">Interactive Salon Floor Map</h4>
+        <div class="floor-map-layout">
+          <div class="floor-table active" onclick="selectSeatingMap('Main Dining Hall', this)">
+            <h5>Table 01</h5>
+            <span>Grand Hall</span>
+          </div>
+          <div class="floor-table" onclick="selectSeatingMap('Garden Terrace', this)">
+            <h5>Table 02</h5>
+            <span>Garden View</span>
+          </div>
+          <div class="floor-table" onclick="selectSeatingMap('Chefs Counter', this)">
+            <h5>Table 03</h5>
+            <span>Chef's Counter</span>
+          </div>
+          <div class="floor-table" onclick="selectSeatingMap('Cozy Booth', this)">
+            <h5>Table 04</h5>
+            <span>Cozy Booth</span>
+          </div>
+          <div class="floor-table" onclick="selectSeatingMap('Window Salon', this)">
+            <h5>Table 05</h5>
+            <span>Window Salon</span>
+          </div>
+          <div class="floor-table" onclick="selectSeatingMap('Presidential Suite', this)">
+            <h5>Table 06</h5>
+            <span>Suite (VIP)</span>
+          </div>
+        </div>
+
+        <ul class="info-list">
+          <li class="info-item">
+            <span class="info-icon">✦</span>
+            <span><strong>Seating Selection:</strong> Click a table on the floor map layout to sync with your reservation.</span>
+          </li>
+          <li class="info-item">
+            <span class="info-icon">✦</span>
+            <span><strong>Dress Code:</strong> Smart Elegant attire is appreciated. No athletic wear.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Advanced Validation Form -->
+      <form id="reservation-form" class="reservation-form">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="cust_name" name="customer_name" placeholder="E.g., Alexander Mercer" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="cust_email" name="customer_email" placeholder="E.g., alex@luxury.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="cust_phone" name="customer_phone" placeholder="E.g., +1 (555) 0123" required>
+        </div>
+        <div class="form-group">
+          <label>Number of Guests</label>
+          <select id="party_size" name="party_size" required>
+            <option value="2">2 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="6">6 Guests</option>
+            <option value="8">8+ Guests</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Preferred Date</label>
+          <input type="date" id="res_date" name="reservation_date" required>
+        </div>
+        <div class="form-group">
+          <label>Preferred Time Slot</label>
+          <select id="res_time" name="reservation_time" required>
+            <option value="5:00 PM">5:00 PM</option>
+            <option value="6:30 PM">6:30 PM</option>
+            <option value="8:00 PM">8:00 PM</option>
+            <option value="9:30 PM">9:30 PM</option>
+          </select>
+        </div>
+
+        <input type="hidden" name="seating_preference" id="seating_pref_input" value="Main Dining Hall">
+
+        <div class="form-group form-group-full">
+          <label>Special Requests / Notes</label>
+          <textarea name="notes" placeholder="Please mention any allergies, celebrations, or dietary preferences..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-gold">Confirm Table Booking</button>
+
+        <div id="reservation-msg" class="form-group-full"></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-header">
+      <span class="section-subtitle">Heritage & Philosophy</span>
+      <h2 class="section-title">Meet Our <span>Culinary Masters</span></h2>
+    </div>
+
+    <div class="chefs-grid">
+      <!-- Chef 1: Marcus Sterling -->
+      <div class="chef-profile-card">
+        <div class="chef-profile-info">
+          <h3>Marcus Sterling</h3>
+          <span class="chef-role-sub">Chef de Cuisine</span>
+          <p class="chef-bio">
+            For nearly two decades, Marcus has redefined modern gastronomy. He blends classical French heritage with avant-garde culinary techniques to create unforgettable flavor journeys.
+          </p>
+          <div class="signature-container">
+            <span class="chef-sig">M. Sterling</span>
+          </div>
+        </div>
+        <div class="chef-image-container">
+          <div class="chef-blob"></div>
+          <img src="{% static 'images/chef.jpg' %}" class="chef-img-sterling"
+               onerror="this.src='https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=600&q=80'" 
+               alt="Master Chef Marcus Sterling">
+        </div>
+      </div>
+
+      <!-- Chef 2: Elena Rostova -->
+      <div class="chef-profile-card">
+        <div class="chef-profile-info">
+          <h3>Elena Rostova</h3>
+          <span class="chef-role-sub">Master Pastry Chef</span>
+          <p class="chef-bio">
+            Elena treats dessert making as pure culinary science. Her signature sweet pairings are infused with Madagascan vanilla extracts, saffron-infused gold caramel, and structural pastry elements.
+          </p>
+          <div class="signature-container">
+            <span class="chef-sig">E. Rostova</span>
+          </div>
+        </div>
+        <div class="chef-image-container">
+          <div class="chef-blob"></div>
+          <img src="{% static 'images/chef2.jpg' %}" class="chef-img-rostova"
+               onerror="this.src='https://images.unsplash.com/photo-1581299894007-aaa50297cf16?auto=format&fit=crop&w=600&q=80'" 
+               alt="Master Chef Elena Rostova">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" style="background: #060605; border-top: 1px solid var(--border-color)">
+    <div class="section-header">
+      <span class="section-subtitle">Reach Out To Us</span>
+      <h2 class="section-title">Hours &amp; <span>Locations</span></h2>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <h4>Physical Location</h4>
+        <p>214 Olive Lane, Soho<br>New York, NY 10013</p>
+      </div>
+
+      <div class="contact-card">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <h4>Operation Hours</h4>
+        <p>Tuesday – Sunday: 5 PM – 11 PM<br><strong>Mondays:</strong> Closed for Rest</p>
+      </div>
+
+      <div class="contact-card">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        <h4>Private Bookings</h4>
+        <p>Phone: +1 (212) 555-0142<br>Email: concierge@zaikahub.com</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Elegant Footer -->
+  <footer class="footer">
+    <div class="footer-logo">zaikahub</div>
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#about">Our Story</a>
+      <a href="#reservation">Book Table</a>
+    </div>
+    <p class="copyright">© 2026 zaikahub Fine Dining Luxury Group. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Scroll active layout modifications
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('top-navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scroll navigation
+    function scrollToSection(id) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Toggle Mobile Navigation Drawer
+    function toggleMobileMenu() {
+      document.getElementById('mobile-overlay').classList.toggle('active');
+      document.getElementById('mobile-drawer').classList.toggle('active');
+    }
+
+    // Dynamic Wine pairing accordion toggle
+    function toggleWinePairing(btn) {
+      const panel = btn.nextElementSibling;
+      panel.classList.toggle('expanded');
+      if (panel.classList.contains('expanded')) {
+        btn.textContent = '✦ Hide Wine Pairing';
+      } else {
+        btn.textContent = '✦ Show Wine Pairing';
+      }
+    }
+
+    // Visual Floor Seating Selection
+    function selectSeatingMap(zoneValue, element) {
+      document.getElementById('seating_pref_input').value = zoneValue;
+      
+      const tables = document.querySelectorAll('.floor-table');
+      tables.forEach(table => table.classList.remove('active'));
+      
+      element.classList.add('active');
+    }
+
+    // Dynamic Menu filtering function
+    function filterMenu(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      const currentButton = Array.from(buttons).find(btn => 
+        btn.textContent.toLowerCase().includes(category) || 
+        (category === 'all' && btn.textContent.toLowerCase().includes('all'))
+      );
+      if (currentButton) currentButton.classList.add('active');
+
+      const cards = document.querySelectorAll('.menu-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+          setTimeout(() => {
+            card.style.opacity = '1';
+          }, 50);
+        } else {
+          card.style.opacity = '0';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 200);
+        }
+      });
+    }
+
+    // Modern Reservation submission with rich success callback ticket view
+    document.getElementById('reservation-form')?.addEventListener('submit', function (e) {
+      e.preventDefault();
+      
+      const custName = document.getElementById('cust_name').value.trim();
+      const custEmail = document.getElementById('cust_email').value.trim();
+      const custPhone = document.getElementById('cust_phone').value.trim();
+      const partySize = document.getElementById('party_size').value;
+      const resDate = document.getElementById('res_date').value;
+      const resTime = document.getElementById('res_time').value;
+      const seatZone = document.getElementById('seating_pref_input').value;
+
+      if (!custName || !custEmail || !custPhone || !resDate || !resTime) {
+        document.getElementById('reservation-msg').innerHTML = `
+          <div class="error-box">
+            <p>Error: Please make sure all contact fields are correctly filled.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const container = document.getElementById('reservation-holder');
+      container.style.opacity = '0.3';
+
+      setTimeout(() => {
+        const bookingID = "EPC-" + Math.floor(100000 + Math.random() * 900000);
+        container.style.opacity = '1';
+        container.innerHTML = `
+          <div class="luxury-ticket-wrapper">
+            <div class="ticket-header">
+              <h2>zaikahub INVITATION</h2>
+              <p style="color: var(--accent-gold); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-top: 5px;">Your Seating Has Been Reserved Successfully</p>
+            </div>
+            
+            <div class="ticket-body">
+              <div class="ticket-field">
+                <span>Guest Name</span>
+                <span>₹{custName}</span>
+              </div>
+              <div class="ticket-field">
+                <span>Assigned Zone</span>
+                <span>₹{seatZone}</span>
+              </div>
+              <div class="ticket-field">
+                <span>Party Size</span>
+                <span>₹{partySize} Persons</span>
+              </div>
+              <div class="ticket-field">
+                <span>Booking Date</span>
+                <span>₹{resDate}</span>
+              </div>
+              <div class="ticket-field">
+                <span>Arrival Time</span>
+                <span>₹{resTime}</span>
+              </div>
+              <div class="ticket-field">
+                <span>Contact Registered</span>
+                <span>₹{custPhone}</span>
+              </div>
+            </div>
+
+            <div class="ticket-footer">
+              <span style="color: var(--text-muted); font-size: 11px; letter-spacing: 1.5px;">SHOW THIS GOLDEN PASS ON ARRIVAL</span>
+              <div class="ticket-pass-id" id="invitation-pass-id">₹{bookingID}</div>
+              <button class="btn btn-outline" style="padding: 10px 20px; font-size: 10px;" onclick="copyInvitationID('₹{bookingID}')">
+                Copy Invitation Code
+              </button>
+              <p style="font-size: 11px; color: #74C69D; margin-top: 5px; display: none;" id="copy-success-indicator">Code copied successfully!</p>
+            </div>
+          </div>
+        `;
+      }, 800);
+    });
+
+    // Cross-browser & iFrame safe clipboard utility using document.execCommand
+    function copyInvitationID(text) {
+      const tempTextArea = document.createElement("textarea");
+      tempTextArea.value = text;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      try {
+        document.execCommand("copy");
+        const indicator = document.getElementById('copy-success-indicator');
+        if (indicator) {
+          indicator.style.display = 'block';
+          setTimeout(() => {
+            indicator.style.display = 'none';
+          }, 2500);
+        }
+      } catch (err) {
+        console.error("Unable to copy code, please note it manually.");
+      }
+      document.body.removeChild(tempTextArea);
+    }
+  </script>
+</body>
